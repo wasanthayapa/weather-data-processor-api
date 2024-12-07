@@ -57,14 +57,27 @@ public class CommonUtil {
         return roundedValue;
     }
 
-
+    /**
+     * Checks if the given date-time string is within the last 7 days.
+     * @param dateTime the date-time string to be checked, in the format expected by the dateTimeFormatter
+     * @return true if the date-time is within the last 7 days, false otherwise
+     */
     public static boolean isWithinLast7Days(String dateTime) {
+        // Parse the date-time string to a LocalDateTime object
         LocalDateTime weatherDate = getDate(dateTime);
+        // Get the date-time for 7 days ago from now
         LocalDateTime sevenDaysAgo = LocalDateTime.now().minusDays(7);
+        // Check if the parsed date-time is not before the date-time of 7 days ago
         return !weatherDate.isBefore(sevenDaysAgo);
     }
 
+    /**
+     * Parses the given date-time string to a LocalDateTime object.
+     * @param dateTime the date-time string to be parsed
+     * @return the LocalDateTime object parsed from the date-time string
+     */
     private static LocalDateTime getDate(String dateTime){
         return LocalDateTime.parse(dateTime, dateTimeFormatter);
     }
+
 }
